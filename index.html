@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <title>Captain Planet 2: Electric Boogaloo</title>
 </head>
 
@@ -14,10 +15,32 @@
     <div class="row">
       <div class=" col-md-6">
         <div class="row">
-          <img src="assets/images/captain-planet.jpg" height="250px">
+          <img id="captain" src="assets/images/captain-planet.jpg" height="250px">
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading text-center"><h2>Ginger</h2></div>
+          <div class="panel-heading text-center">
+            <h2>Captain Planet</h2></div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="btn-group-lg btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary mirX">Mirror X</button>
+                <button type="button" class="btn btn-primary mirY">Mirror Y</button>
+                <button type="button" class="btn btn-danger resetMir">Reset</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="btn-group-lg btn-group col" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary rotateCW">Rotate CW</button>
+                <button type="button" class="btn btn-primary rotateCCW">Rotate CCW</button>
+              </div>
+            </div>
+             <div class="row">
+              <div class="btn-group-lg btn-group col" role="group" aria-label="...">
+                <button type="button" class="btn btn-primary rotateXCW">Rotate 3D CW</button>
+                <button type="button" class="btn btn-primary rotateXCCW">Rotate 3D CCW</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class=" col-md-6">
@@ -25,12 +48,70 @@
           <img src="assets/images/ginger.jpg" height="250px">
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading text-center"><h2>Captain</h2></div>
+          <div class="panel-heading text-center">
+            <h2>Ginger</h2></div>
         </div>
       </div>
     </div>
   </div>
   </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+    var $resetMir = $(".resetMir");
+    var $mirX = $(".mirX");
+    var $mirY = $(".mirY");
+    var $captain = $("#captain");
+    var flippedX = 1;
+    var flippedY = 1;
+    var $rotateCW = $(".rotateCW");
+    var $rotateCCW = $(".rotateCCW");
+    var rotation = 0;
+    var roll = 0;
+
+    $mirX.on("click", function() {
+      if (flippedX === 1) {
+        flippedX = -1
+      } else {
+        flippedX = 1
+      }
+
+      $captain.css("transform", "scaleX(" + flippedX + ")");
+    })
+
+    $mirY.on("click", function() {
+      if (flippedY === 1) {
+        flippedY = -1
+      } else {
+        flippedY = 1
+      }
+
+      $captain.css("transform", "scaleY(" + flippedY + ")");
+    })
+
+    $rotateCW.on("click", function(){
+      rotation += 45;
+      $captain.css("transform", "rotateZ(" + rotation + "deg)");
+    })
+
+    $rotateCCW.on("click", function(){
+      rotation -= 45;
+      $captain.css("transform", "rotateZ(" + rotation + "deg)");
+    })
+
+    $resetMir.on("click", function() {
+      $captain.css("transform", "scaleY(1) scaleX(1) rotateX(0)");
+      flippedY = 1;
+      flippedX = 1;
+      rotation = 0;
+    })
+
+  });
+  </script>
 </body>
 
 </html>
+
+
+
+<!-- transform: rotateX(150deg) -->
